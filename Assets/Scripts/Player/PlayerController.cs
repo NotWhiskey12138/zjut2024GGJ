@@ -10,12 +10,12 @@ public class PlayerController : MonoBehaviour
     public ZJUT2024GGJ inputControl;
     public Vector2 inputDirection;
     public Rigidbody2D rb;
-    //public PhysicsCheck physicsCheck;
+    public PhysicsCheck physicsCheck;
     public CapsuleCollider2D coll;
     //public FurirenAnmation furierenAnimation;
-    //[Header("物理材质")]
-    //public PhysicsMaterial2D normal;
-    //public PhysicsMaterial2D wall;
+    [Header("物理材质")]
+    public PhysicsMaterial2D normal;
+    public PhysicsMaterial2D wall;
     [Header("属性数值")]
     public float speed;
     public float jumpForce;
@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         inputControl.Player.Jump.started += Jump;
         coll = GetComponent<CapsuleCollider2D>();
+        physicsCheck = GetComponent<PhysicsCheck>();
     }
 
     
@@ -51,6 +52,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         run();
+        stateCheck();
     }
     
     public void run()
@@ -73,6 +75,12 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-
+        if (physicsCheck.isGround)
+            rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+    }
+    
+    public void stateCheck()
+    {
+        coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
     }
 }
