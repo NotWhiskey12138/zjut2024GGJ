@@ -74,7 +74,8 @@ public class PlayerController : MonoBehaviour
         stateCheck();
         outsideDeath();
     }
-    
+
+    #region basic status
     public void run()
     {
         rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
@@ -110,6 +111,7 @@ public class PlayerController : MonoBehaviour
         if(deathCheck.isDead)
             PlayerDead();
     }
+    #endregion
 
     #region 道具相关
 
