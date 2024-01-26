@@ -53,6 +53,15 @@ public partial class @ZJUT2024GGJ: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Contact"",
+                    ""type"": ""Button"",
+                    ""id"": ""3df986a8-5387-4c35-b7b4-2d24904e14e1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @ZJUT2024GGJ: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""edb0e7c5-5c5e-49fa-bd7b-4b2e1f3dedcc"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Contact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -742,6 +762,7 @@ public partial class @ZJUT2024GGJ: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
+        m_Player_Contact = m_Player.FindAction("Contact", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -818,6 +839,7 @@ public partial class @ZJUT2024GGJ: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Use;
+    private readonly InputAction m_Player_Contact;
     public struct PlayerActions
     {
         private @ZJUT2024GGJ m_Wrapper;
@@ -825,6 +847,7 @@ public partial class @ZJUT2024GGJ: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Use => m_Wrapper.m_Player_Use;
+        public InputAction @Contact => m_Wrapper.m_Player_Contact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -843,6 +866,9 @@ public partial class @ZJUT2024GGJ: IInputActionCollection2, IDisposable
             @Use.started += instance.OnUse;
             @Use.performed += instance.OnUse;
             @Use.canceled += instance.OnUse;
+            @Contact.started += instance.OnContact;
+            @Contact.performed += instance.OnContact;
+            @Contact.canceled += instance.OnContact;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -856,6 +882,9 @@ public partial class @ZJUT2024GGJ: IInputActionCollection2, IDisposable
             @Use.started -= instance.OnUse;
             @Use.performed -= instance.OnUse;
             @Use.canceled -= instance.OnUse;
+            @Contact.started -= instance.OnContact;
+            @Contact.performed -= instance.OnContact;
+            @Contact.canceled -= instance.OnContact;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1041,6 +1070,7 @@ public partial class @ZJUT2024GGJ: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
+        void OnContact(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
