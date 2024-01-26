@@ -82,7 +82,7 @@ public class PlayerTwoController : MonoBehaviour
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
     }
 
-    public void stateCheck()
+    public void stateCheck()//physics materia selector
     {
         coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
     }
