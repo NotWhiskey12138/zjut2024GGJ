@@ -1,13 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerTwoController : MonoBehaviour
 {
-    public ZJUT2024GGJ inputControl;
+    public Player2 inputControl2;
     public Vector2 inputDirection;
     public Rigidbody2D rb;
     public PhysicsCheck physicsCheck;
@@ -23,32 +22,32 @@ public class PlayerController : MonoBehaviour
     public bool isDead;
     private void Awake()
     {
-        inputControl = new ZJUT2024GGJ();
-        
+        inputControl2 = new Player2();
+
     }
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        inputControl.Player.Jump.started += Jump;
+        inputControl2.Player.Jump.started += Jump;
         coll = GetComponent<CapsuleCollider2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
         deathCheck = GetComponent<DeathCheck>();
     }
 
-    
+
 
     private void OnEnable()
     {
-        inputControl.Enable();
+        inputControl2.Enable();
     }
     private void OnDisable()
     {
-        inputControl.Disable();
+        inputControl2.Disable();
     }
     private void Update()
     {
-        inputDirection = inputControl.Player.Move.ReadValue<Vector2>();
-        rb= GetComponent<Rigidbody2D>();
+        inputDirection = inputControl2.Player.Move.ReadValue<Vector2>();
+        rb = GetComponent<Rigidbody2D>();
 
     }
     private void FixedUpdate()
@@ -57,7 +56,7 @@ public class PlayerController : MonoBehaviour
         stateCheck();
         outsideDeath();
     }
-    
+
     public void run()
     {
         rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
@@ -73,8 +72,8 @@ public class PlayerController : MonoBehaviour
     public void PlayerDead()
     {
         isDead = true;
-        inputControl.Player.Disable();
-        Debug.Log("player1 is dead");
+        inputControl2.Player.Disable();
+        Debug.Log("player2 is dead");
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -82,7 +81,7 @@ public class PlayerController : MonoBehaviour
         if (physicsCheck.isGround)
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
     }
-    
+
     public void stateCheck()
     {
         coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
@@ -90,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
     public void outsideDeath()//³ö½çËÀÍöÅÐ¶¨
     {
-        if(deathCheck.isDead)
+        if (deathCheck.isDead)
             PlayerDead();
     }
 }
