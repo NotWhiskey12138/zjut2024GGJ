@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 inputDirection;
     public Rigidbody2D rb;
     public PhysicsCheck physicsCheck;
+    public DeathCheck deathCheck;
     public CapsuleCollider2D coll;
     //public FurirenAnmation furierenAnimation;
     [Header("物理材质")]
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
         inputControl.Player.Jump.started += Jump;
         coll = GetComponent<CapsuleCollider2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
+        deathCheck = GetComponent<DeathCheck>();
     }
 
     
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         run();
         stateCheck();
+        outsideDeath();
     }
     
     public void run()
@@ -71,6 +74,7 @@ public class PlayerController : MonoBehaviour
     {
         isDead = true;
         inputControl.Player.Disable();
+        Debug.Log("player is dead");
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -82,5 +86,11 @@ public class PlayerController : MonoBehaviour
     public void stateCheck()
     {
         coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
+    }
+
+    public void outsideDeath()//出界死亡判定
+    {
+        if(deathCheck.isDead)
+            PlayerDead();
     }
 }
