@@ -10,7 +10,7 @@ public class PlayerAnimation : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();   
-        anim = GetComponent<Animator>();  
+        anim = GetComponentInChildren<Animator>();  
         physicsCheck = GetComponent<PhysicsCheck>();    
     }
 
