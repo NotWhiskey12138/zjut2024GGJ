@@ -619,9 +619,8 @@ MonoBehaviour:
   jumpForce: 5
   isDead: 0
   _item: {fileID: 0}
-  _item_obj: {fileID: 0}
+  _item_obj: {fileID: 1138253947}
   Item_Event: {fileID: 0}
-  PlayerAddForceEventSO: {fileID: 0}
 --- !u!70 &698175957
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

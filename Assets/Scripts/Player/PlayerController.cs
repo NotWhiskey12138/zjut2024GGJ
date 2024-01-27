@@ -132,20 +132,26 @@ public class PlayerController : MonoBehaviour
 
     #region 道具相关
 
-    private void OnTriggerEnter2D(Collider2D other)
+    /*private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Item"))
         {
             now_coll_item = other;
         }
-    }
+    }*/
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Item") && now_coll_item == other)
+        if (other.CompareTag("Item"))
+        {
             is_item_stillcoll = true;
+            now_coll_item = other;
+        }
         else
+        {
             is_item_stillcoll = false;
+            now_coll_item = null;
+        }
     }
 
     /// <summary>
@@ -173,15 +179,15 @@ public class PlayerController : MonoBehaviour
     /// <param name="item"></param>
     public void Pickup_Item(InputAction.CallbackContext context)
     {
-        if (is_item_stillcoll)
+        if (is_item_stillcoll&&now_coll_item!=null)
         {
             var item = now_coll_item.GetComponentInParent<Item>();
-
+            
             _item = item;
+            Item_Event = item.itemEventSO;
             _item.gameObject.SetActive(false);
             _item_obj.GetComponentInChildren<SpriteRenderer>().color = _item_obj.GetComponentInChildren<SpriteRenderer>().color;
             _item_obj.SetActive(true);
-            Item_Event = item.itemEventSO;
         }
         
     }
