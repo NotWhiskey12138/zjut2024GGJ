@@ -5,28 +5,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class PlayerTwoController : MonoBehaviour
+public class PlayerTwoController : MonoSingleton<PlayerTwoController>
 {
-    
-        // 私有的静态变量，用于存储单例实例
-        private static PlayerTwoController instance;
-
-        // 私有的构造函数，防止外部实例化对象
-        private PlayerTwoController() { }
-
-        // 公共的静态属性或方法，用于获取单例实例
-        public static PlayerTwoController Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new PlayerTwoController();
-                }
-                return instance;
-            }
-        }
-
     public static int playerID = 2;
     public Player2 inputControl;
     public Vector2 inputDirection;
