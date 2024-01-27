@@ -1,13 +1,33 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using static UnityEditor.Progress;
 
 public class PlayerTwoController : MonoBehaviour
 {
+    
+        // 私有的静态变量，用于存储单例实例
+        private static PlayerTwoController instance;
+
+        // 私有的构造函数，防止外部实例化对象
+        private PlayerTwoController() { }
+
+        // 公共的静态属性或方法，用于获取单例实例
+        public static PlayerTwoController Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new PlayerTwoController();
+                }
+                return instance;
+            }
+        }
+
+
     public Player2 inputControl;
     public Vector2 inputDirection;
     public Rigidbody2D rb;
@@ -15,33 +35,31 @@ public class PlayerTwoController : MonoBehaviour
     public DeathCheck deathCheck;
     public CapsuleCollider2D coll;
     //public FurirenAnmation furierenAnimation;
-
+    
     [Header("物理材质")]
     public PhysicsMaterial2D normal;
     public PhysicsMaterial2D wall;
-
+    
     [Header("属性数值")]
     public float speed;
     public float jumpForce;
     public bool isDead;
-
-    [Header("当前道具栏")]
-    [SerializeField] private Item _item;
+    
+    [Header("当前道具栏")] 
+    [SerializeField]private Item _item; 
     public GameObject _item_obj;
     private Collider2D now_coll_item; //记录当前碰撞物体
     private bool is_item_stillcoll;//检测物体是否在玩家脚下
 
-    [Header("道具广播")]
+    [Header("道具广播")] 
     public VoidEventSO Item_Event;
 
-    [Header("角色位移事件")]
-    public VoidEventSO PlayerAddForceEventSO;
-
+    
     private void Awake()
     {
         inputControl = new Player2();
         inputControl.Player.Jump.started += Jump;
-
+        
     }
     private void Start()
     {
@@ -75,8 +93,7 @@ public class PlayerTwoController : MonoBehaviour
         stateCheck();
         outsideDeath();
     }
-
-    #region basic status
+    
     public void run()
     {
         rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
@@ -101,7 +118,7 @@ public class PlayerTwoController : MonoBehaviour
         if (physicsCheck.isGround)
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
     }
-
+    
     public void stateCheck()
     {
         coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
@@ -109,27 +126,32 @@ public class PlayerTwoController : MonoBehaviour
 
     public void outsideDeath()//出界死亡判定
     {
-        if (deathCheck.isDead)
+        if(deathCheck.isDead)
             PlayerDead();
     }
-    #endregion
 
     #region 道具相关
 
-    private void OnTriggerEnter2D(Collider2D other)
+    /*private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Item"))
         {
             now_coll_item = other;
         }
-    }
+    }*/
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Item") && now_coll_item == other)
+        if (other.CompareTag("Item"))
+        {
             is_item_stillcoll = true;
+            now_coll_item = other;
+        }
         else
+        {
             is_item_stillcoll = false;
+            now_coll_item = null;
+        }
     }
 
     /// <summary>
@@ -157,19 +179,19 @@ public class PlayerTwoController : MonoBehaviour
     /// <param name="item"></param>
     public void Pickup_Item(InputAction.CallbackContext context)
     {
-        if (is_item_stillcoll)
+        if (is_item_stillcoll&&now_coll_item!=null)
         {
             var item = now_coll_item.GetComponentInParent<Item>();
-
+            
             _item = item;
-            _item.gameObject.SetActive(false);
-            _item_obj.GetComponentInChildren<SpriteRenderer>().color = _item_obj.GetComponentInChildren<SpriteRenderer>().color;
-            _item_obj.SetActive(true);
             Item_Event = item.itemEventSO;
+            _item.gameObject.SetActive(false);
+            _item_obj.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponentInChildren<SpriteRenderer>().sprite;
+            _item_obj.SetActive(true);
         }
-
+        
     }
-
+    
     /// <summary>
     /// 使用道具
     /// </summary>
@@ -186,9 +208,9 @@ public class PlayerTwoController : MonoBehaviour
 
     #region 角色被位移
 
-    public void AddPlayerForce()
+    public void AddPlayerForce(float force,Vector2 dir)
     {
-        //PlayerAddForceEventSO
+        rb.AddForce(dir * force);
     }
 
     #endregion
