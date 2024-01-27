@@ -217,6 +217,7 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
     public int getPlayerID()
     {
         return playerID;
@@ -224,7 +225,7 @@ public class PlayerController : MonoBehaviour
     public void setCapacity(int num)
     {
         inputControl.Player.Use.RemoveAction();
-        switch(num)
+        switch (num)
         {
             case 0:
                 inputControl.Player.Use.performed += Fly;
