@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7443121236212759058}
   - component: {fileID: 5063078034646859117}
   - component: {fileID: 1187259771044279887}
+  - component: {fileID: -4641114387136984862}
   m_Layer: 7
   m_Name: player1 1
   m_TagString: Player
@@ -152,7 +153,9 @@ MonoBehaviour:
   isLongPressing: 0
   longPressDuration: 1
   currentPressTime: 0
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 1583736638713884509}
+  playerPosition: {x: 0, y: 0}
+  stageCheck: {fileID: -4641114387136984862}
   normal: {fileID: 6200000, guid: f27ed2ca30b10fc4485dccc42777a3f2, type: 2}
   wall: {fileID: 6200000, guid: e0a9df13aeab00b46a6b4e6a9edbc9c8, type: 2}
   speed: 290
@@ -162,6 +165,7 @@ MonoBehaviour:
   _item: {fileID: 0}
   _item_obj: {fileID: 6732211353982775940}
   Item_Event: {fileID: 0}
+  HLS_Aim: {fileID: 0}
 --- !u!114 &7443121236212759058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +218,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2eb0e8f1ccb4243a57f0fa2e3f6021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-4641114387136984862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4107182651718712006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eabc4daa6d35ae4db15682da3e58731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bottomOffset: {x: 0, y: 0}
+  checkRaduis: 0.5
+  stageLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  isStage: 0
 --- !u!1 &6732211353982775940
 GameObject:
   m_ObjectHideFlags: 0

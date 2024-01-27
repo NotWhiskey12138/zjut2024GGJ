@@ -101,7 +101,7 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
         isDead = true;
         //inputControl.Player.Disable();
         playerTransform.position = playerPosition;
-        Debug.Log("player1 is dead");
+        Debug.Log("player2 is dead");
     }
 
 
