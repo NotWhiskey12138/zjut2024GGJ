@@ -18,6 +18,8 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
     public bool isLongPressing;
     public float longPressDuration = 1.0f;
     public float currentPressTime = 0.0f;
+    public Transform playerTransform;
+    public Vector2 playerPosition;
     //public FurirenAnmation furierenAnimation;
 
     [Header("ŒÔ¿Ì≤ƒ÷ ")]
@@ -95,9 +97,11 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
     public void PlayerDead()
     {
         isDead = true;
-        inputControl.Player.Disable();
+        //inputControl.Player.Disable();
+        playerTransform.position = playerPosition;
         Debug.Log("player1 is dead");
     }
+
 
     public void Jump(InputAction.CallbackContext context)
     {
