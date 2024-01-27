@@ -186,7 +186,7 @@ public class PlayerController : MonoBehaviour
             _item = item;
             Item_Event = item.itemEventSO;
             _item.gameObject.SetActive(false);
-            _item_obj.GetComponentInChildren<SpriteRenderer>().color = _item_obj.GetComponentInChildren<SpriteRenderer>().color;
+            _item_obj.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponentInChildren<SpriteRenderer>().sprite;
             _item_obj.SetActive(true);
         }
         
