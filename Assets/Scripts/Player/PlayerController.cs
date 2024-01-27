@@ -224,7 +224,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     #endregion
 
-
+    //华莱士动画播放？
     public void HLS_Shoot_True()
     {
 
@@ -232,43 +232,55 @@ public class PlayerController : MonoSingleton<PlayerController>
     }
     
 
-    public int getPlayerID()
-    {
-        return playerID;
-    }
-    public void setCapacity(int num)
-    {
-        inputControl.Player.Use.RemoveAction();
-        switch (num)
-        {
-            case 0:
-                inputControl.Player.Use.performed += Fly;
-                break;
-            default:
-                inputControl.Player.Use.started += Somecapacity;
-                break;
-        }
-    }
+    //public int getPlayerID()
+    //{
+    //    return playerID;
+    //}
+    //public void setCapacity(int num)
+    //{
+    //    inputControl.Player.Use.RemoveAction();
+    //    switch (num)
+    //    {
+    //        case 0:
+    //            inputControl.Player.Use.performed += Fly;
+    //            break;
+    //        default:
+    //            inputControl.Player.Use.started += Somecapacity;
+    //            break;
+    //    }
+    //}
 
-    private void Somecapacity(InputAction.CallbackContext context)
-    {
-        speed = 500;
-    }
+    //private void Somecapacity(InputAction.CallbackContext context)
+    //{
+    //    speed = 500;
+    //}
 
-    private void Fly(InputAction.CallbackContext context)
-    {
-        rb.AddForce(transform.up * betterJumpForce, ForceMode2D.Impulse);
-    }
+    //private void Fly(InputAction.CallbackContext context)
+    //{
+    //    rb.AddForce(transform.up * betterJumpForce, ForceMode2D.Impulse);
+    //}
     public void setIsLongPressing(bool flag)
     {
         isLongPressing = flag;
     }
+
+
     public bool getIsLongPressing()
     {
         return isLongPressing;
     }
+
+
+    //判断是否通过终点
     public bool getIsStage()
     {
         return stageCheck.isStage;
     }
+
+    #region DLW(体重修改)
+    public void massChange()
+    {
+        rb.mass = 5;
+    }
+    #endregion
 }

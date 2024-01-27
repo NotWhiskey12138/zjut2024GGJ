@@ -11,12 +11,12 @@ public class StateChangeTest_Item : Item
     public override void OnItemEvent()
     {
         base.OnItemEvent();
-        //获取player实例
-        GameObject player = transform.parent.gameObject;
-        PlayerController controller = player.GetComponent<PlayerController>();
+        ////获取player实例
+        //GameObject player = transform.parent.gameObject;
+        //PlayerController controller = player.GetComponent<PlayerController>();
 
         //启用飞行
         //controller.inputControl.Player.Use.started += fly;
-        controller.setCapacity(1);
+        //controller.setCapacity(1);
     }
 }

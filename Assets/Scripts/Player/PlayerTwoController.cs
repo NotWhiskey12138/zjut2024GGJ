@@ -258,4 +258,10 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
     {
         return stageCheck.isStage;
     }
+    #region DLW(ÌåÖØÐÞ¸Ä)
+    public void massChange()
+    {
+        rb.mass = 5;
+    }
+    #endregion
 }
