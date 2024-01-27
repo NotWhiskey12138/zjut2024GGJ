@@ -20,6 +20,7 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
     public float currentPressTime = 0.0f;
     public Transform playerTransform;
     public Vector2 playerPosition;
+    public StageCheck stageCheck;
     //public FurirenAnmation furierenAnimation;
 
     [Header("ŒÔ¿Ì≤ƒ÷ ")]
@@ -55,7 +56,7 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
         coll = GetComponent<CapsuleCollider2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
         deathCheck = GetComponent<DeathCheck>();
-
+        stageCheck = GetComponent<StageCheck>();
         now_coll_item = null;
     }
 
@@ -252,5 +253,9 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
     public bool getIslongPressing()
     {
         return isLongPressing;
+    }
+    public bool getIsStage()
+    {
+        return stageCheck.isStage;
     }
 }
