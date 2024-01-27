@@ -18,7 +18,6 @@ public class PlayerController : MonoSingleton<PlayerController>
     public bool isLongPressing;
     public float longPressDuration = 1.0f;
     public float currentPressTime = 0.0f;
-    public Transform playerTransform;
     //public FurirenAnmation furierenAnimation;
 
     [Header("物理材质")]
@@ -79,7 +78,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         stateCheck();
         outsideDeath();
     }
-    #region 基础状态
+    
     public void run()
     {
         rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
@@ -116,7 +115,6 @@ public class PlayerController : MonoSingleton<PlayerController>
         if(deathCheck.isDead)
             PlayerDead();
     }
-    #endregion
 
     #region 道具相关
 
