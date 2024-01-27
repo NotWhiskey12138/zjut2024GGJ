@@ -20,22 +20,12 @@ public class HLS_Item : Item
         // //���÷���
         // //controller.inputControl.Player.Use.started += fly;
         // controller.setCapacity(0);
-        if (Item.Instance.getIf2Haveit())
+        if (Item.Instance.getIf2Haveit())//玩家二
         {
-            //PlayerTwoController.Instance.inputControl.Player.Use.performed += _ => PlayerTwoController.Instance.setIsLongPressing(true);
-            //if (PlayerTwoController.Instance.getIslongPressing())
-            //{
-            //    PlayerTwoController.Instance.currentPressTime += Time.deltaTime;
-            //    Debug.Log("now pressing time is "+PlayerTwoController.Instance.currentPressTime);
-            //}
-            //PlayerTwoController.Instance.inputControl.Player.Use.canceled += _ => PlayerTwoController.Instance.setIsLongPressing(false);
-            //while (PlayerTwoController.Instance.getIslongPressing())
-            //{
-            //    
-            //}
+            
             PlayerTwoController.Instance.AddPlayerForce();
         }
-        else
+        else//玩家一行动
         {
             //PlayerController.Instance.inputControl.Player.Use.performed += _ => PlayerController.Instance.setIsLongPressing(true);
             //PlayerController.Instance.inputControl.Player.Use.canceled += _ => PlayerController.Instance.setIsLongPressing(false);
