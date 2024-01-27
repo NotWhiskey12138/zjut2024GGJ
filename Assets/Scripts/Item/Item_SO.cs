@@ -14,5 +14,5 @@ public class Item_SO : ScriptableObject
     public string itemName;
     public ItemType itemType;
     public Sprite itemIcon;
-    
+
 }
