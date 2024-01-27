@@ -54,12 +54,19 @@ public class PlayerController : MonoBehaviour
     [Header("µÀ¾ß¹ã²¥")] 
     public VoidEventSO Item_Event;
 
-    
+    /// <summary>
+    /// better jump
+    /// </summary>
+    [SerializeField] float jumpPressWindow;
+    private float fallMultiplier = 1.5f;
+    private float lowJumpMultiplier = 1f;
+    private bool isJump = false;
+    private float jumpTime = 0;
     private void Awake()
     {
         inputControl = new ZJUT2024GGJ();
         inputControl.Player.Jump.started += Jump;
-        
+        inputControl.Player.Jump.canceled += BetterJump;
     }
     private void Start()
     {
@@ -86,6 +93,10 @@ public class PlayerController : MonoBehaviour
 
         CheckIfHaveItem();
         Debug.Log(now_coll_item);
+
+        if (isJump)
+            jumpTimeUpdate();
+
     }
     private void FixedUpdate()
     {
@@ -115,8 +126,25 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (physicsCheck.isGround)
+        if (physicsCheck.isGround) { 
+
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+
+            isJump = true;
+            Debug.Log("jump down");
+        }
+    }
+    private void jumpTimeUpdate() {
+        jumpTime += Time.deltaTime;
+    }
+    public void BetterJump(InputAction.CallbackContext context) {
+        
+        if (jumpTime >= jumpPressWindow)
+            rb.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier;
+        else if(jumpTime < jumpPressWindow)
+            rb.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplier;
+        isJump = false;
+        jumpTime = 0;
     }
     
     public void stateCheck()
