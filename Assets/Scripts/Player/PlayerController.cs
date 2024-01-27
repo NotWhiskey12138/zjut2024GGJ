@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
 
     public void AddPlayerForce()
     {
-        PlayerAddForceEventSO
+        //PlayerAddForceEventSO
     }
 
     #endregion
