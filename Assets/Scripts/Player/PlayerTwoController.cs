@@ -164,7 +164,7 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
         if (is_item_stillcoll && now_coll_item != null)
         {
             var item = now_coll_item.GetComponentInParent<Item>();
-
+            Item.Instance.If2Haveit();
             _item = item;
             Item_Event = item.itemEventSO;
             _item.gameObject.SetActive(false);

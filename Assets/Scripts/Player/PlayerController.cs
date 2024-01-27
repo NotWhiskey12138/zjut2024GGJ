@@ -166,6 +166,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         {
             var item = now_coll_item.GetComponentInParent<Item>();
             
+            Item.Instance.If1Haveit();
             _item = item;
             Item_Event = item.itemEventSO;
             _item.gameObject.SetActive(false);
@@ -199,6 +200,8 @@ public class PlayerController : MonoSingleton<PlayerController>
         rb.AddForce(dir*force);
     }
 
+    
+    
     #endregion
 
     public int getPlayerID()

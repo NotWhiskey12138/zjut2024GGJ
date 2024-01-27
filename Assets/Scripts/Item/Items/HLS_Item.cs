@@ -19,9 +19,7 @@ public class HLS_Item : Item
         // //���÷���
         // //controller.inputControl.Player.Use.started += fly;
         // controller.setCapacity(0);
-        if(PlayerController.playerID == 0 ) { 
         PlayerController.Instance.AddPlayerForce();
         Debug.Log("HLS_Item被触发了");
-        }
     }
 }
