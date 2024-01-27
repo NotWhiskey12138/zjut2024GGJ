@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     [Header("属性数值")]
     public float speed;
     public float jumpForce;
+    public float flyForce;
     public bool isDead;
     
     [Header("当前道具栏")] 
@@ -54,14 +55,14 @@ public class PlayerController : MonoBehaviour
     [Header("道具广播")] 
     public VoidEventSO Item_Event;
 
-    /// <summary>
-    /// better jump
-    /// </summary>
+    
+      [Header("其他")]
     [SerializeField] float jumpPressWindow;
     private float fallMultiplier = 1.5f;
     private float lowJumpMultiplier = 1f;
     private bool isJump = false;
     private float jumpTime = 0;
+
     private void Awake()
     {
         inputControl = new ZJUT2024GGJ();
@@ -146,7 +147,9 @@ public class PlayerController : MonoBehaviour
         isJump = false;
         jumpTime = 0;
     }
-    
+    public void fly() {
+        rb.AddForce(transform.up * jumpForce);
+    }
     public void stateCheck()
     {
         coll.sharedMaterial = physicsCheck.isGround ? normal : wall;

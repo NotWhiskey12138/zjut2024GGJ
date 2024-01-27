@@ -43,6 +43,7 @@ public class PlayerTwoController : MonoBehaviour
     [Header("属性数值")]
     public float speed;
     public float jumpForce;
+    public float flyForce;
     public bool isDead;
     
     [Header("当前道具栏")] 
@@ -54,12 +55,18 @@ public class PlayerTwoController : MonoBehaviour
     [Header("道具广播")] 
     public VoidEventSO Item_Event;
 
-    
+    [Header("其他")]
+    [SerializeField] float jumpPressWindow;
+    private float fallMultiplier = 1.5f;
+    private float lowJumpMultiplier = 1f;
+    private bool isJump = false;
+    private float jumpTime = 0;
     private void Awake()
     {
         inputControl = new Player2();
         inputControl.Player.Jump.started += Jump;
-        
+        inputControl.Player.Jump.canceled += BetterJump;
+
     }
     private void Start()
     {
@@ -118,7 +125,24 @@ public class PlayerTwoController : MonoBehaviour
         if (physicsCheck.isGround)
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
     }
-    
+    private void jumpTimeUpdate()
+    {
+        jumpTime += Time.deltaTime;
+    }
+    public void BetterJump(InputAction.CallbackContext context)
+    {
+
+        if (jumpTime >= jumpPressWindow)
+            rb.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier;
+        else if (jumpTime < jumpPressWindow)
+            rb.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplier;
+        isJump = false;
+        jumpTime = 0;
+    }
+    public void fly()
+    {
+        rb.AddForce(transform.up * jumpForce);
+    }
     public void stateCheck()
     {
         coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
