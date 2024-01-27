@@ -28,6 +28,8 @@ public class Item : MonoBehaviour
     public virtual void OnItemEvent()
     {
         Debug.Log(itemData.itemName + "被触发了");
+        //清除当前玩家的能力
+        //加入该能力
     }
 }
     
