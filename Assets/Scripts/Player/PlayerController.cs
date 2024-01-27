@@ -19,6 +19,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     public float longPressDuration = 1.0f;
     public float currentPressTime = 0.0f;
     public Transform playerTransform;
+    public Vector2 playerPosition;
     //public FurirenAnmation furierenAnimation;
 
     [Header("ŒÔ¿Ì≤ƒ÷ ")]
@@ -49,6 +50,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     }
     private void Start()
     {
+        playerTransform = GetComponent<Transform>();
+        playerPosition = playerTransform.position;
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<CapsuleCollider2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
@@ -96,7 +99,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     public void PlayerDead()
     {
         isDead = true;
-        inputControl.Player.Disable();
+        //inputControl.Player.Disable();
+        playerTransform.position = playerPosition;
         Debug.Log("player1 is dead");
     }
 
