@@ -21,7 +21,7 @@ public class HLS_Item : Item
         // controller.setCapacity(0);
         if (Item.Instance.getIf2Haveit())
         {
-            PlayerTwoController.Instance.inputControl.Player.Use.performed += _ => { isPaused = true; };
+            //PlayerTwoController.Instance.inputControl.Player.Use.performed += _ => { isPaused = true; };
             PlayerTwoController.Instance.AddPlayerForce();
         }
         else
