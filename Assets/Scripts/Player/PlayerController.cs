@@ -16,10 +16,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     public DeathCheck deathCheck;
     public CapsuleCollider2D coll;
     public bool isLongPressing;
-    public float longPressDuration = 1.0f;
-    public float currentPressTime = 0.0f;
     //public FurirenAnmation furierenAnimation;
-
+    
     [Header("ŒÔ¿Ì≤ƒ÷ ")]
     public PhysicsMaterial2D normal;
     public PhysicsMaterial2D wall;
@@ -235,13 +233,5 @@ public class PlayerController : MonoSingleton<PlayerController>
     private void Fly(InputAction.CallbackContext context)
     {
         rb.AddForce(transform.up * betterJumpForce, ForceMode2D.Impulse);
-    }
-    public void setIsLongPressing(bool flag)
-    {
-        isLongPressing = flag;
-    }
-    public bool getIsLongPressing()
-    {
-        return isLongPressing;
     }
 }

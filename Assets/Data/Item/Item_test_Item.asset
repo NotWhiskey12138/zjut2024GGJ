@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85175e9addff7e642b9437823cc79d02, type: 3}
   m_Name: Item_test_Item
   m_EditorClassIdentifier: 
-  itemId: 4
-  itemName: test
+  itemId: 2
+  itemName: coffee
   itemType: 1
   itemIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
