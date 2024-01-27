@@ -2425,6 +2425,7 @@ Transform:
   - {fileID: 630145971}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &2003916910
 GameObject:
   m_ObjectHideFlags: 0
@@ -2545,13 +2546,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2003916910}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> parent of 854aa01 (Merge branch 'main' of https://github.com/NotWhiskey12138/zjut2024GGJ)
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+<<<<<<< HEAD
   - {fileID: 1519820103}
   - {fileID: 638928999}
   - {fileID: 1202357196}
   - {fileID: 16996101}
   - {fileID: 1606321774}
   - {fileID: 856237412}
+=======
+  - {fileID: 1989491335}
+  - {fileID: 449493243}
+  - {fileID: 702552233}
+>>>>>>> parent of 854aa01 (Merge branch 'main' of https://github.com/NotWhiskey12138/zjut2024GGJ)

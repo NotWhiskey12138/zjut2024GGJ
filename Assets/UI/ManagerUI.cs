@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseUI : MonoBehaviour
@@ -23,11 +22,6 @@ public class PauseUI : MonoBehaviour
         print("1 test button hello world!");
     }
 
-    public void ReturnMenu()
-    {
-        SceneManager.LoadScene("ChooseMenu");
-    }
-    
     private void Start()
         {
         pause_button.onClick.AddListener(PauseGame);
