@@ -15,6 +15,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     public PhysicsCheck physicsCheck;
     public DeathCheck deathCheck;
     public CapsuleCollider2D coll;
+    public bool isLongPressing;
     //public FurirenAnmation furierenAnimation;
     
     [Header("ŒÔ¿Ì≤ƒ÷ ")]
@@ -200,9 +201,11 @@ public class PlayerController : MonoSingleton<PlayerController>
         rb.AddForce(dir*force);
     }
 
-    
-    
+
+
     #endregion
+
+
 
     public int getPlayerID()
     {
