@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -15,6 +16,8 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
     public DeathCheck deathCheck;
     public CapsuleCollider2D coll;
     public bool isLongPressing;
+    public float longPressDuration = 1.0f;
+    public float currentPressTime = 0.0f;
     //public FurirenAnmation furierenAnimation;
 
     [Header("ŒÔ¿Ì≤ƒ÷ ")]
@@ -204,27 +207,35 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
     {
         return playerID;
     }
-    public void setCapacity(int num)
-    {
-        inputControl.Player.Use.RemoveAction();
-        switch (num)
-        {
-            case 0:
-                inputControl.Player.Use.performed += Fly;
-                break;
-            default:
-                inputControl.Player.Use.started += Somecapacity;
-                break;
-        }
-    }
+    //public void setCapacity(int num)
+    //{
+    //    inputControl.Player.Use.RemoveAction();
+    //    switch (num)
+    //    {
+    //        case 0:
+    //            inputControl.Player.Use.performed += Fly;
+    //            break;
+    //        default:
+    //            inputControl.Player.Use.started += Somecapacity;
+    //            break;
+    //    }
+    //}
 
-    private void Somecapacity(InputAction.CallbackContext context)
-    {
-        speed = 500;
-    }
+    //private void Somecapacity(InputAction.CallbackContext context)
+    //{
+    //    speed = 500;
+    //}
 
-    private void Fly(InputAction.CallbackContext context)
+    //private void Fly(InputAction.CallbackContext context)
+    //{
+    //    rb.AddForce(transform.up * betterJumpForce, ForceMode2D.Impulse);
+    //}
+    public void setIsLongPressing(bool flag)
     {
-        rb.AddForce(transform.up * betterJumpForce, ForceMode2D.Impulse);
+        isLongPressing = flag;
+    }
+    public bool getIslongPressing()
+    {
+        return isLongPressing;
     }
 }
