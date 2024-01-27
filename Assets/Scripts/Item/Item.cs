@@ -15,12 +15,12 @@ public class Item : MonoBehaviour
         this.itemEventSO = itemEvent;
     }
 
-    public void AddItemEvent()
+    public virtual void AddItemEvent()
     {
         itemEventSO.OnEventRaised += OnItemEvent;
     }
 
-    public void removeItemEvent()
+    public virtual void removeItemEvent()
     {
         itemEventSO.OnEventRaised -= OnItemEvent;
     }

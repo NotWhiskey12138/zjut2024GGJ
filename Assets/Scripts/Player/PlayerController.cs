@@ -7,6 +7,27 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    
+        // 私有的静态变量，用于存储单例实例
+        private static PlayerController instance;
+
+        // 私有的构造函数，防止外部实例化对象
+        private PlayerController() { }
+
+        // 公共的静态属性或方法，用于获取单例实例
+        public static PlayerController Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new PlayerController();
+                }
+                return instance;
+            }
+        }
+
+
     public ZJUT2024GGJ inputControl;
     public Vector2 inputDirection;
     public Rigidbody2D rb;
@@ -33,8 +54,6 @@ public class PlayerController : MonoBehaviour
     [Header("道具广播")] 
     public VoidEventSO Item_Event;
 
-    [Header("角色位移事件")] 
-    public VoidEventSO PlayerAddForceEventSO;
     
     private void Awake()
     {
@@ -183,9 +202,9 @@ public class PlayerController : MonoBehaviour
 
     #region 角色被位移
 
-    public void AddPlayerForce()
+    public void AddPlayerForce(float force,Vector2 dir)
     {
-        PlayerAddForceEventSO
+        rb.AddForce(dir * force);
     }
 
     #endregion
