@@ -329,6 +329,9 @@ MonoBehaviour:
   physicsCheck: {fileID: 0}
   deathCheck: {fileID: 0}
   coll: {fileID: 0}
+  isLongPressing: 0
+  longPressDuration: 1
+  currentPressTime: 0
   normal: {fileID: 0}
   wall: {fileID: 0}
   speed: 290
@@ -681,7 +684,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2059565787335154141, guid: 84aaabbd042dd25489a0e06513a0b2bb, type: 3}
       propertyPath: m_Name
-      value: Coffee
+      value: HLS
       objectReference: {fileID: 0}
     - target: {fileID: 3191197441254198526, guid: 84aaabbd042dd25489a0e06513a0b2bb, type: 3}
       propertyPath: m_Name
