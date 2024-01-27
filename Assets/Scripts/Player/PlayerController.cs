@@ -150,6 +150,12 @@ public class PlayerController : MonoBehaviour
     public void fly() {
         rb.AddForce(transform.up * jumpForce);
     }
+    public void shoot() { 
+        
+        //instantiate
+        //GetComponent<Bullet>().setVelocity();
+        
+    }
     public void stateCheck()
     {
         coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
