@@ -22,14 +22,4 @@ public class COCO_Item : Item
         base.removeItemEvent();
     }
     
-    public override void OnItemEvent()
-    {
-        StartCoroutine(AddForceToPlayer());
-    }
-
-    IEnumerator AddForceToPlayer()
-    {
-        yield return new WaitForSeconds(1);
-        PlayerController.Instance.AddPlayerForce(coco_force,dir);
-    }
 }

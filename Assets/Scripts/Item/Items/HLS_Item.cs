@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,12 +12,14 @@ public class HLS_Item : Item
     public override void OnItemEvent()
     {
         base.OnItemEvent();
-        //»ñÈ¡playerÊµÀı
-        GameObject player = transform.parent.gameObject;
-        PlayerController controller = player.GetComponent<PlayerController>();
-
-        //ÆôÓÃ·ÉĞĞ
-        //controller.inputControl.Player.Use.started += fly;
-        controller.setCapacity(0);
+        //ï¿½ï¿½È¡playerÊµï¿½ï¿½
+        // GameObject player = transform.parent.gameObject;
+        // PlayerController controller = player.GetComponent<PlayerController>();
+        //
+        // //ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½
+        // //controller.inputControl.Player.Use.started += fly;
+        // controller.setCapacity(0);
+        PlayerController.Instance.AddPlayerForce();
+        Debug.Log("HLS_Itemè¢«è§¦å‘äº†");
     }
 }

@@ -134,7 +134,7 @@ public partial class @Player2: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""858ed9e3-9cc4-4665-b42f-addc5e5bff8c"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

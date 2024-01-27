@@ -6,28 +6,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoSingleton<PlayerController>
 {
-    
-        // 私有的静态变量，用于存储单例实例
-        private static PlayerController instance;
-
-        // 私有的构造函数，防止外部实例化对象
-        private PlayerController() { }
-
-        // 公共的静态属性或方法，用于获取单例实例
-        public static PlayerController Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new PlayerController();
-                }
-                return instance;
-            }
-        }
-
     public static int playerID = 1;
     public ZJUT2024GGJ inputControl;
     public Vector2 inputDirection;
@@ -211,9 +191,12 @@ public class PlayerController : MonoBehaviour
 
     #region 角色被位移
 
-    public void AddPlayerForce(float force,Vector2 dir)
+    public void AddPlayerForce()
     {
-        rb.AddForce(dir * force);
+        Debug.Log("ADDFORCE被触发了" );
+        Vector2 dir= new Vector2(0, 5);
+        int force = 50;
+        rb.AddForce(dir*force);
     }
 
     #endregion
