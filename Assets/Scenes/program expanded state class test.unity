@@ -157,9 +157,9 @@ GameObject:
   - component: {fileID: 204746342}
   - component: {fileID: 204746340}
   - component: {fileID: 204746347}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: player2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -331,8 +331,8 @@ MonoBehaviour:
   coll: {fileID: 0}
   normal: {fileID: 0}
   wall: {fileID: 0}
-  speed: 100
-  jumpForce: 4
+  speed: 290
+  jumpForce: 5
   betterJumpForce: 0
   isDead: 0
   _item: {fileID: 0}
@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 1218621687}
   - component: {fileID: 1218621686}
   - component: {fileID: 1218621685}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: player2_sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
