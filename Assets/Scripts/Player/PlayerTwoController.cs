@@ -190,8 +190,11 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
 
     #region 角色被位移
 
-    public void AddPlayerForce(float force, Vector2 dir)
+    public void AddPlayerForce()
     {
+        Debug.Log("player2addForce被触发了");
+        Vector2 dir = new Vector2(0, 5);
+        int force = 50;
         rb.AddForce(dir * force);
     }
 

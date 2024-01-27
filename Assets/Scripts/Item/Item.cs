@@ -19,7 +19,7 @@ public class Item : MonoSingleton<Item>
 
     private void Update()
     {
-        Debug.Log("这个物品属于"+is1or2);
+        Debug.Log("这个物品属于" + is1or2);
     }
 
     public virtual void AddItemEvent()
@@ -36,15 +36,19 @@ public class Item : MonoSingleton<Item>
     {
         Debug.Log(itemData.itemName + "被触发了");
     }
-    
+
     public void If1Haveit()
     {
         is1or2 = false;
     }
-    
+
     public void If2Haveit()
     {
         is1or2 = true;
+    }
+    public bool getIf2Haveit()
+    {
+        return is1or2;
     }
 }
     
