@@ -14,6 +14,7 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
     public PhysicsCheck physicsCheck;
     public DeathCheck deathCheck;
     public CapsuleCollider2D coll;
+    public bool isLongPressing;
     //public FurirenAnmation furierenAnimation;
 
     [Header("ŒÔ¿Ì≤ƒ÷ ")]
