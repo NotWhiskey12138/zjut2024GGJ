@@ -59,7 +59,6 @@ public class PlayerController : MonoBehaviour
     {
         inputControl = new ZJUT2024GGJ();
         inputControl.Player.Jump.started += Jump;
-        
     }
     private void Start()
     {
