@@ -27,7 +27,7 @@ public class PlayerTwoController : MonoBehaviour
             }
         }
 
-
+    public static int playerID = 2;
     public Player2 inputControl;
     public Vector2 inputDirection;
     public Rigidbody2D rb;
@@ -35,31 +35,32 @@ public class PlayerTwoController : MonoBehaviour
     public DeathCheck deathCheck;
     public CapsuleCollider2D coll;
     //public FurirenAnmation furierenAnimation;
-    
+
     [Header("物理材质")]
     public PhysicsMaterial2D normal;
     public PhysicsMaterial2D wall;
-    
+
     [Header("属性数值")]
-    public float speed;
+    public float speed = 290;
     public float jumpForce;
+    public float betterJumpForce;
     public bool isDead;
-    
-    [Header("当前道具栏")] 
-    [SerializeField]private Item _item; 
+
+    [Header("当前道具栏")]
+    [SerializeField] private Item _item;
     public GameObject _item_obj;
     private Collider2D now_coll_item; //记录当前碰撞物体
     private bool is_item_stillcoll;//检测物体是否在玩家脚下
 
-    [Header("道具广播")] 
+    [Header("道具广播")]
     public VoidEventSO Item_Event;
 
-    
+
     private void Awake()
     {
         inputControl = new Player2();
         inputControl.Player.Jump.started += Jump;
-        
+
     }
     private void Start()
     {
@@ -93,7 +94,7 @@ public class PlayerTwoController : MonoBehaviour
         stateCheck();
         outsideDeath();
     }
-    
+
     public void run()
     {
         rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
@@ -104,6 +105,7 @@ public class PlayerTwoController : MonoBehaviour
             faceDir = 1;
         //人物翻转
         transform.localScale = new Vector3(faceDir, 1, 1);
+        Debug.Log("player1moved");
     }
 
     public void PlayerDead()
@@ -118,7 +120,7 @@ public class PlayerTwoController : MonoBehaviour
         if (physicsCheck.isGround)
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
     }
-    
+
     public void stateCheck()
     {
         coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
@@ -126,7 +128,7 @@ public class PlayerTwoController : MonoBehaviour
 
     public void outsideDeath()//出界死亡判定
     {
-        if(deathCheck.isDead)
+        if (deathCheck.isDead)
             PlayerDead();
     }
 
@@ -179,19 +181,19 @@ public class PlayerTwoController : MonoBehaviour
     /// <param name="item"></param>
     public void Pickup_Item(InputAction.CallbackContext context)
     {
-        if (is_item_stillcoll&&now_coll_item!=null)
+        if (is_item_stillcoll && now_coll_item != null)
         {
             var item = now_coll_item.GetComponentInParent<Item>();
-            
+
             _item = item;
             Item_Event = item.itemEventSO;
             _item.gameObject.SetActive(false);
             _item_obj.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponentInChildren<SpriteRenderer>().sprite;
             _item_obj.SetActive(true);
         }
-        
+
     }
-    
+
     /// <summary>
     /// 使用道具
     /// </summary>
@@ -208,10 +210,37 @@ public class PlayerTwoController : MonoBehaviour
 
     #region 角色被位移
 
-    public void AddPlayerForce(float force,Vector2 dir)
+    public void AddPlayerForce(float force, Vector2 dir)
     {
         rb.AddForce(dir * force);
     }
 
     #endregion
+    public int getPlayerID()
+    {
+        return playerID;
+    }
+    public void setCapacity(int num)
+    {
+        inputControl.Player.Use.RemoveAction();
+        switch (num)
+        {
+            case 0:
+                inputControl.Player.Use.performed += Fly;
+                break;
+            default:
+                inputControl.Player.Use.started += Somecapacity;
+                break;
+        }
+    }
+
+    private void Somecapacity(InputAction.CallbackContext context)
+    {
+        speed = 500;
+    }
+
+    private void Fly(InputAction.CallbackContext context)
+    {
+        rb.AddForce(transform.up * betterJumpForce, ForceMode2D.Impulse);
+    }
 }

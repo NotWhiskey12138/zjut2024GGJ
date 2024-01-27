@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class HLS_Item : Item
+public class StateChangeTest_Item : Item
 {
-    public HLS_Item(Item_SO itemData, VoidEventSO itemEvent) : base(itemData, itemEvent)
+    StateChangeTest_Item(Item_SO itemData, VoidEventSO itemEvent) : base(itemData, itemEvent)
     {
 
     }
@@ -16,9 +14,9 @@ public class HLS_Item : Item
         //获取player实例
         GameObject player = transform.parent.gameObject;
         PlayerController controller = player.GetComponent<PlayerController>();
-        
+
         //启用飞行
         //controller.inputControl.Player.Use.started += fly;
-        controller.setCapacity(0);
+        controller.setCapacity(1);
     }
 }

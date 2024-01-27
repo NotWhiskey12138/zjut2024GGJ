@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -27,7 +28,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
+    public static int playerID = 1;
     public ZJUT2024GGJ inputControl;
     public Vector2 inputDirection;
     public Rigidbody2D rb;
@@ -41,8 +42,9 @@ public class PlayerController : MonoBehaviour
     public PhysicsMaterial2D wall;
     
     [Header("属性数值")]
-    public float speed;
+    public float speed = 290;
     public float jumpForce;
+    public float betterJumpForce;
     public bool isDead;
     
     [Header("当前道具栏")] 
@@ -104,6 +106,7 @@ public class PlayerController : MonoBehaviour
             faceDir = 1;
         //人物翻转
         transform.localScale = new Vector3(faceDir, 1, 1);
+        Debug.Log("player1moved");
     }
 
     public void PlayerDead()
@@ -214,4 +217,31 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+    public int getPlayerID()
+    {
+        return playerID;
+    }
+    public void setCapacity(int num)
+    {
+        inputControl.Player.Use.RemoveAction();
+        switch(num)
+        {
+            case 0:
+                inputControl.Player.Use.performed += Fly;
+                break;
+            default:
+                inputControl.Player.Use.started += Somecapacity;
+                break;
+        }
+    }
+
+    private void Somecapacity(InputAction.CallbackContext context)
+    {
+        speed = 500;
+    }
+
+    private void Fly(InputAction.CallbackContext context)
+    {
+        rb.AddForce(transform.up * betterJumpForce, ForceMode2D.Impulse);
+    }
 }
