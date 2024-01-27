@@ -15,4 +15,4 @@ MonoBehaviour:
   itemId: 3
   itemName: HLS
   itemType: 1
-  itemIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  itemIcon: {fileID: 21300000, guid: 54b1e1fcee63a734f89156d639f7b902, type: 3}

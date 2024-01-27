@@ -24,6 +24,8 @@ public class HLS_Item : Item
         {
             
             PlayerTwoController.Instance.AddPlayerForce();
+            PlayerTwoController.Instance.HLS_Shoot_True();
+            PlayerTwoController.Instance.ClearItem();
         }
         else//玩家一行动
         {
@@ -31,6 +33,8 @@ public class HLS_Item : Item
             //PlayerController.Instance.inputControl.Player.Use.canceled += _ => PlayerController.Instance.setIsLongPressing(false);
             //if(PlayerController.Instance.isLongPressing)
                 PlayerController.Instance.AddPlayerForce();
+                PlayerController.Instance.HLS_Shoot_True();
+                PlayerController.Instance.ClearItem();
         }
         Debug.Log("HLS_Item被触发了");
     }

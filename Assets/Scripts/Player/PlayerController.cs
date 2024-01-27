@@ -41,6 +41,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     [Header("道具广播")] 
     public VoidEventSO Item_Event;
 
+    [Header("华莱士喷射")] public GameObject HLS_Aim;
+
     
     private void Awake()
     {
@@ -184,6 +186,13 @@ public class PlayerController : MonoSingleton<PlayerController>
         }
         
     }
+
+    public void ClearItem()
+    {
+        _item = null;
+        Item_Event = null;
+        _item_obj.SetActive(false);
+    }
     
     /// <summary>
     /// 使用道具
@@ -214,6 +223,12 @@ public class PlayerController : MonoSingleton<PlayerController>
     #endregion
 
 
+    public void HLS_Shoot_True()
+    {
+
+        HLS_Aim.SetActive(true);
+    }
+    
 
     public int getPlayerID()
     {

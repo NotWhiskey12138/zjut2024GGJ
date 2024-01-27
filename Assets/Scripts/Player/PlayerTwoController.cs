@@ -41,6 +41,7 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
     [Header("道具广播")]
     public VoidEventSO Item_Event;
 
+    [Header("华莱士喷射")] public Animation HLS_Aim;
 
     private void Awake()
     {
@@ -192,8 +193,18 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
         Item_Event.RaiseEvent();
         _item.removeItemEvent();
     }
-
-
+    
+    public void HLS_Shoot_True()
+    {
+        HLS_Aim.Play();
+    }
+    public void ClearItem()
+    {
+        _item = null;
+        Item_Event = null;
+        _item_obj.SetActive(false);
+    }
+    
     #endregion
 
     #region 角色被位移
