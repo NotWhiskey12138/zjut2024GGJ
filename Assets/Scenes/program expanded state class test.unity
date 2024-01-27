@@ -848,11 +848,19 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: -7.07
       objectReference: {fileID: 0}
     - target: {fileID: 3310325094792416498, guid: 08f816c4cc3307c4cb934121adee61b6, type: 3}
       propertyPath: m_LocalPosition.y
       value: -2.5
+=======
+      value: 3.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310325094792416498, guid: 08f816c4cc3307c4cb934121adee61b6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+>>>>>>> parent of be277c5 (animation and some check range changes)
 =======
       value: 3.34
       objectReference: {fileID: 0}
@@ -1089,6 +1097,10 @@ SceneRoots:
   - {fileID: 1760488510}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  - {fileID: 204746346}
+>>>>>>> parent of be277c5 (animation and some check range changes)
 =======
   - {fileID: 204746346}
 >>>>>>> parent of be277c5 (animation and some check range changes)
