@@ -169,7 +169,7 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
         if (!isThrow)
         {
             GameObject go = Instantiate(chicken, transform.position, Quaternion.identity);
-            go.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            go.GetComponent<Rigidbody2D>().velocity = new Vector2(faceDir*5, faceDir*5);
             chickenTransform = go.transform;
         }
         else
