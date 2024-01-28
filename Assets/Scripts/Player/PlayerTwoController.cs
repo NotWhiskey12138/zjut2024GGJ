@@ -219,7 +219,7 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
     {
         Debug.Log("player2addForce±ª¥•∑¢¡À");
         Vector2 dir = new Vector2(0, 5);
-        int force = 50;
+        int force = 60;
         rb.AddForce(dir * force);
     }
 

@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class HLS_Item : Item
 {
+    [SerializeField]
     private int jumpnum;
 
     private void Start()
