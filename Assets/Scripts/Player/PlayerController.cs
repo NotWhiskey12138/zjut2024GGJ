@@ -34,40 +34,74 @@ public class PlayerController : MonoBehaviour
     public PhysicsCheck physicsCheck;
     public DeathCheck deathCheck;
     public CapsuleCollider2D coll;
+<<<<<<< Updated upstream
+=======
+    public bool isLongPressing;
+    public float longPressDuration = 1.0f;
+    public float currentPressTime = 0.0f;
+>>>>>>> Stashed changes
     //public FurirenAnmation furierenAnimation;
-    
-    [Header("ŒÔ¿Ì≤ƒ÷ ")]
+
+    [Header("")]
     public PhysicsMaterial2D normal;
     public PhysicsMaterial2D wall;
+<<<<<<< Updated upstream
     
     [Header(" Ù–‘ ˝÷µ")]
     public float speed;
     public float jumpForce;
     public float flyForce;
-    public bool isDead;
-    
-    [Header("µ±«∞µ¿æﬂ¿∏")] 
-    [SerializeField]private Item _item; 
-    public GameObject _item_obj;
-    private Collider2D now_coll_item; //º«¬ºµ±«∞≈ˆ◊≤ŒÔÃÂ
-    private bool is_item_stillcoll;//ºÏ≤‚ŒÔÃÂ «∑Ò‘⁄ÕÊº“Ω≈œ¬
+=======
 
-    [Header("µ¿æﬂπ„≤•")] 
+    [Header("÷µ")]
+    public float speed = 290;
+    public float jumpForce;
+    public float dashSpeed;
+    public float betterJumpForce;
+>>>>>>> Stashed changes
+    public bool isDead;
+    private bool isDash;
+
+    [Header("«∞")]
+    [SerializeField] private Item _item;
+    public GameObject _item_obj;
+    private Collider2D now_coll_item; //¬º«∞◊≤
+    private bool is_item_stillcoll;//«∑“Ω
+
+    [Header("ﬂπ„≤•")]
     public VoidEventSO Item_Event;
 
+<<<<<<< Updated upstream
     
       [Header("∆‰À˚")]
     [SerializeField] float jumpPressWindow;
+=======
+    [Header("ÂÖ∂‰ªñ")]
+    [SerializeField] float jumpPressWindow;
+    [SerializeField] GameObject chicken;
+    [SerializeField] GameObject bullet;
+    [SerializeField] float bulletSpeed;
+>>>>>>> Stashed changes
     private float fallMultiplier = 1.5f;
     private float lowJumpMultiplier = 1f;
     private bool isJump = false;
     private float jumpTime = 0;
+<<<<<<< Updated upstream
+=======
+    private int faceDir;
+    private bool activateOrCancle = true;//true == enalbe false == disable
+    private Transform chickenTransform;
+>>>>>>> Stashed changes
 
     private void Awake()
     {
         inputControl = new ZJUT2024GGJ();
         inputControl.Player.Jump.started += Jump;
+<<<<<<< Updated upstream
         inputControl.Player.Jump.canceled += BetterJump;
+=======
+
+>>>>>>> Stashed changes
     }
     private void Start()
     {
@@ -101,21 +135,63 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        run();
+        if (isDash)
+            dash();
+        else
+            run();
         stateCheck();
         outsideDeath();
     }
-    
+
     public void run()
     {
         rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
-        int faceDir = (int)transform.localScale.x;
+         faceDir = (int)transform.localScale.x;
         if (inputDirection.x < 0)
             faceDir = -1;
         else if (inputDirection.x > 0)
             faceDir = 1;
-        //»ÀŒÔ∑≠◊™
+        //◊™
         transform.localScale = new Vector3(faceDir, 1, 1);
+    }
+    private void jumpTimeUpdate()
+    {
+        jumpTime += Time.deltaTime;
+    }
+    public void BetterJump(InputAction.CallbackContext context)
+    {
+
+        if (jumpTime >= jumpPressWindow)
+            rb.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier;
+        else if (jumpTime < jumpPressWindow)
+            rb.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplier;
+        isJump = false;
+        jumpTime = 0;
+    }
+    public void fly()
+    {
+        rb.AddForce(transform.up * jumpForce);
+    }
+    public void shoot()
+    {
+
+        GameObject go = Instantiate(bullet, transform.position, Quaternion.identity);
+        go.GetComponent<Bullet>().SetBullet(new Vector2(faceDir, 0), bulletSpeed, true);
+       
+    }
+        public void dash()
+    {
+        rb.velocity = new Vector2(faceDir * dashSpeed, rb.velocity.y);
+    }
+    public void throwChicken()
+    {
+       GameObject go = Instantiate(chicken, transform.position, Quaternion.identity);
+        go.AddComponent<Rigidbody2D>().velocity = new Vector2(3.0f,2.0f);
+        chickenTransform = go.GetComponent<Transform>();
+        
+    }
+    public void transition() {//‰º†ÈÄÅ
+        transform.position = chickenTransform.position;
     }
 
     public void PlayerDead()
@@ -156,18 +232,22 @@ public class PlayerController : MonoBehaviour
         //GetComponent<Bullet>().setVelocity();
         
     }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     public void stateCheck()
     {
         coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
     }
 
-    public void outsideDeath()//≥ˆΩÁÀ¿Õˆ≈–∂®
+    public void outsideDeath()//–∂
     {
-        if(deathCheck.isDead)
+        if (deathCheck.isDead)
             PlayerDead();
     }
 
-    #region µ¿æﬂœ‡πÿ
+    #region 
 
     /*private void OnTriggerEnter2D(Collider2D other)
     {
@@ -177,6 +257,14 @@ public class PlayerController : MonoBehaviour
         }
     }*/
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("player2") && isDash)
+        {
+            isDash = false;
+
+        }
+    }
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Item"))
@@ -192,7 +280,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ºÏ≤‚ ÷…œ”–√ª”–µ¿æﬂ
+    /// √ª–µ
     /// </summary>
     private void CheckIfHaveItem()
     {
@@ -211,26 +299,31 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ºÒ∆µ¿æﬂ
+    /// 
     /// </summary>
     /// <param name="item"></param>
     public void Pickup_Item(InputAction.CallbackContext context)
     {
-        if (is_item_stillcoll&&now_coll_item!=null)
+        if (is_item_stillcoll && now_coll_item != null)
         {
             var item = now_coll_item.GetComponentInParent<Item>();
+<<<<<<< Updated upstream
             
+=======
+
+            Item.Instance.If1Haveit();
+>>>>>>> Stashed changes
             _item = item;
             Item_Event = item.itemEventSO;
             _item.gameObject.SetActive(false);
-            _item_obj.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponentInChildren<SpriteRenderer>().sprite;
+            _item_obj.GetComponentInChildren<SpriteRenderer>().sprite = item.itemData.itemIcon;
             _item_obj.SetActive(true);
         }
-        
+
     }
-    
+
     /// <summary>
-    ///  π”√µ¿æﬂ
+    ///  π√µ
     /// </summary>
     /// <param name="context"></param>
     private void Use_Item(InputAction.CallbackContext context)
@@ -243,12 +336,79 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    #region Ω«…´±ªŒª“∆
+    #region …´Œª
 
     public void AddPlayerForce(float force,Vector2 dir)
     {
+<<<<<<< Updated upstream
         rb.AddForce(dir * force);
     }
 
     #endregion
 }
+=======
+        Debug.Log("ADDFORCE");
+        Vector2 dir = new Vector2(0, 5);
+        int force = 50;
+        rb.AddForce(dir * force);
+
+    }
+
+    public void activateOrCancleElbow()
+    {
+        if (activateOrCancle)
+        {
+            isDash = true;
+            activateOrCancle = false;
+        }
+        else
+        {
+            isDash = false;
+            activateOrCancle = true;
+        }
+
+        
+    }
+  
+
+    #endregion
+
+
+
+    public int getPlayerID()
+    {
+        return playerID;
+    }
+    public void setCapacity(int num)
+    {
+        inputControl.Player.Use.RemoveAction();
+        switch (num)
+        {
+            case 0:
+                inputControl.Player.Use.performed += Fly;
+                break;
+            default:
+                inputControl.Player.Use.started += Somecapacity;
+                break;
+        }
+    }
+
+    private void Somecapacity(InputAction.CallbackContext context)
+    {
+        speed = 500;
+    }
+
+    private void Fly(InputAction.CallbackContext context)
+    {
+        rb.AddForce(transform.up * betterJumpForce, ForceMode2D.Impulse);
+    }
+    public void setIsLongPressing(bool flag)
+    {
+        isLongPressing = flag;
+    }
+    public bool getIsLongPressing()
+    {
+        return isLongPressing;
+    }
+}
+>>>>>>> Stashed changes
