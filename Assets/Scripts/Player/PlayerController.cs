@@ -44,8 +44,21 @@ public class PlayerController : MonoSingleton<PlayerController>
     public VoidEventSO Item_Event;
 
     [Header("»ªÀ³Ê¿ÅçÉä")] public GameObject HLS_Aim;
+    [Header("Item")]
+    [SerializeField] private GameObject chicken;
+    [SerializeField] private float dashSpeed;
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private float bulletSpeed;
+    [SerializeField] private float jumpPressWindow;
+    [SerializeField] private float fallMultiplier = 1.5f;
+    [SerializeField] private float lowJumpMultiplier = 1f;
+    private float jumpTime;
+    private Transform chickenTransform;
+    private int faceDir;
+    private bool isDash;
+    private bool isJump;
+    private bool isThrow;
 
-    
     private void Awake()
     {
         inputControl = new ZJUT2024GGJ();
@@ -83,7 +96,10 @@ public class PlayerController : MonoSingleton<PlayerController>
     }
     private void FixedUpdate()
     {
-        run();
+        if (!isDash)
+            run();
+        else
+            dash();
         stateCheck();
         outsideDeath();
     }
@@ -91,7 +107,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     public void run()
     {
         rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
-        int faceDir = (int)transform.localScale.x;
+         faceDir = (int)transform.localScale.x;
         if (inputDirection.x < 0)
             faceDir = -1;
         else if (inputDirection.x > 0)
@@ -118,7 +134,64 @@ public class PlayerController : MonoSingleton<PlayerController>
             Musiceffect.instance.PlaySoundJump();
         }
     }
-    
+    private void jumpTimeUpdate()
+    {
+        jumpTime += Time.deltaTime;
+    }
+    public void BetterJump(InputAction.CallbackContext context)
+    {
+
+        if (jumpTime >= jumpPressWindow)
+            rb.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier;
+        else if (jumpTime < jumpPressWindow)
+            rb.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplier;
+        isJump = false;
+        jumpTime = 0;
+    }
+    public void fly()
+    {
+        rb.AddForce(transform.up * jumpForce);
+    }
+
+    public void activateOrCancleElbow()
+    {
+        if (!isDash)
+        {
+            isDash = true;
+
+        }
+        else
+        {
+            isDash = false;
+
+        }
+    }
+    public void throwChicken()
+    {
+        if (!isThrow)
+        {
+            GameObject go = Instantiate(chicken, transform.position, Quaternion.identity);
+            go.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            chickenTransform = go.transform;
+            isThrow = true;
+        }
+        else
+        {
+            isThrow = false;
+            transform.position = chickenTransform.position;
+        }
+
+    }
+
+    public void dash()
+    {
+        rb.velocity = new Vector2(dashSpeed * faceDir, rb.velocity.y);
+    }
+    public void shoot()
+    {
+        GameObject go = Instantiate(bullet, transform.position, Quaternion.identity);
+        go.GetComponent<Bullet>().SetBullet(new Vector2(faceDir, 0), bulletSpeed, true);
+    }
     public void stateCheck()
     {
         coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
@@ -140,7 +213,15 @@ public class PlayerController : MonoSingleton<PlayerController>
             now_coll_item = other;
         }
     }*/
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isDash)
+            if (collision.CompareTag("player2"))
+            {
+                isDash = false;
+                PlayerTwoController.Instance.AddPlayerForce();
+            }
+    }
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Item"))
