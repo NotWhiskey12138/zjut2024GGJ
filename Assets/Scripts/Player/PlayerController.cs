@@ -191,6 +191,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     public void shoot()
     {
         GameObject go = Instantiate(bullet, transform.position, Quaternion.identity);
+        Debug.Log("player1 shoot");
         go.GetComponent<Bullet>().SetBullet(new Vector2(faceDir, 0), bulletSpeed, true);
     }
     public void stateCheck()

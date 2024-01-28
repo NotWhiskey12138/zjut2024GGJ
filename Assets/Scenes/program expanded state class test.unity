@@ -537,6 +537,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bullet
       objectReference: {fileID: 0}
+    - target: {fileID: 5428915764705684802, guid: 0389d53a3aa04354695f26e8c43500f2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428915764705684802, guid: 0389d53a3aa04354695f26e8c43500f2, type: 3}
+      propertyPath: m_TagString
+      value: bullet
+      objectReference: {fileID: 0}
     - target: {fileID: 7388132660546501322, guid: 0389d53a3aa04354695f26e8c43500f2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.12
@@ -988,6 +996,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: player2
       objectReference: {fileID: 0}
+    - target: {fileID: 5627427723480199006, guid: 05dca3e5551e0a54ea9a80859844765f, type: 3}
+      propertyPath: m_TagString
+      value: player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074510224256895929, guid: 05dca3e5551e0a54ea9a80859844765f, type: 3}
+      propertyPath: m_TagString
+      value: player2
+      objectReference: {fileID: 0}
     - target: {fileID: 8250182375639255515, guid: 05dca3e5551e0a54ea9a80859844765f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.38
@@ -1105,8 +1121,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2828781459228287771, guid: 47230cdae60365244bf3d1ead1456197, type: 3}
+      propertyPath: m_TagString
+      value: player1
+      objectReference: {fileID: 0}
     - target: {fileID: 2914690097351869881, guid: 47230cdae60365244bf3d1ead1456197, type: 3}
       propertyPath: m_Name
+      value: player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2914690097351869881, guid: 47230cdae60365244bf3d1ead1456197, type: 3}
+      propertyPath: m_TagString
       value: player1
       objectReference: {fileID: 0}
     - target: {fileID: 7716235385407412987, guid: 47230cdae60365244bf3d1ead1456197, type: 3}
@@ -1120,6 +1144,10 @@ PrefabInstance:
     - target: {fileID: 7716235385407412987, guid: 47230cdae60365244bf3d1ead1456197, type: 3}
       propertyPath: dashSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716235385407412987, guid: 47230cdae60365244bf3d1ead1456197, type: 3}
+      propertyPath: bulletSpeed
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

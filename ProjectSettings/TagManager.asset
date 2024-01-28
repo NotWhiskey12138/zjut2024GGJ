@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Item
   - water
+  - player1
+  - player2
+  - bullet
+  - TNT
   layers:
   - Default
   - TransparentFX
