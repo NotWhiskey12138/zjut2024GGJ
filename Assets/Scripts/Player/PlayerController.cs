@@ -374,4 +374,9 @@ public class PlayerController : MonoSingleton<PlayerController>
         rb.mass = 5;
     }
     #endregion
+
+    public Sprite GetItemImage()
+    {
+        return _item.itemData.itemIcon;
+    }
 }

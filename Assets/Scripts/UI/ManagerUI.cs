@@ -18,6 +18,12 @@ public class PauseUI : MonoBehaviour
         Time.timeScale = 0;
         }
 
+    public void Return()
+    {
+        SceneManager.LoadScene("Start");
+        
+    }
+
     public void ReturnMenu() { SceneManager.LoadScene("ChooseMenu"); }
 
     public void debug_test1()
