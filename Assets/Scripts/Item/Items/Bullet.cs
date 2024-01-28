@@ -34,5 +34,9 @@ public class Bullet : MonoBehaviour
                 PlayerController.Instance.PlayerDead();
             }
         }
+        if (collision.CompareTag("TNT")) {
+            collision.GetComponent<TNT>().explode();
+        }
+        Destroy(gameObject);
     }
 }
