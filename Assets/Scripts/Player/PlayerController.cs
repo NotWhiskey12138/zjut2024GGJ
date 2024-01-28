@@ -21,6 +21,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     public Transform playerTransform;
     public Vector2 playerPosition;
     public StageCheck stageCheck;
+    public int deathCounter = 0;
     //public FurirenAnmation furierenAnimation;
 
     [Header("ŒÔ¿Ì≤ƒ÷ ")]
@@ -105,13 +106,17 @@ public class PlayerController : MonoSingleton<PlayerController>
         isDead = true;
         //inputControl.Player.Disable();
         playerTransform.position = playerPosition;
-        Debug.Log("player1 is dead");
+        deathCounter++;
+        Debug.Log("player1 is dead"+deathCounter+" times");
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
         if (physicsCheck.isGround)
+        {
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+            Musiceffect.Instance.PlaySoundEffect();
+        }
     }
     
     public void stateCheck()

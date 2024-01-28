@@ -35,6 +35,10 @@ public class Item : MonoSingleton<Item>
     public virtual void OnItemEvent()
     {
         Debug.Log(itemData.itemName + "被触发了");
+        //if (itemData.audioSource != null && itemData.audioSource.clip != null)
+        //{
+        //    itemData.audioSource.Play();
+        //}
     }
 
     public void If1Haveit()

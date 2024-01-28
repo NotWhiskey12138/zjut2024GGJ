@@ -25,7 +25,7 @@ public class HLS_Item : Item
             
             PlayerTwoController.Instance.AddPlayerForce();
             PlayerTwoController.Instance.HLS_Shoot_True();
-            PlayerTwoController.Instance.ClearItem();
+            //PlayerTwoController.Instance.ClearItem();
         }
         else//玩家一行动
         {
@@ -34,8 +34,9 @@ public class HLS_Item : Item
             //if(PlayerController.Instance.isLongPressing)
                 PlayerController.Instance.AddPlayerForce();
                 PlayerController.Instance.HLS_Shoot_True();
-                PlayerController.Instance.ClearItem();
+                //PlayerController.Instance.ClearItem();
         }
+        Musiceffect.Instance.PlaySoundEffect();
         Debug.Log("HLS_Item被触发了");
     }
 }
