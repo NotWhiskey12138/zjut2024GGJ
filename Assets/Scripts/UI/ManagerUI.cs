@@ -15,7 +15,7 @@ public class PauseUI : MonoBehaviour
         }
     public void ContinueGame()
         {
-        Time.timeScale = 0;
+        Time.timeScale = 1;
         }
 
     public void Return()
@@ -24,7 +24,7 @@ public class PauseUI : MonoBehaviour
         
     }
 
-    public void ReturnMenu() { SceneManager.LoadScene("ChooseMenu"); }
+    public void ReturnMenu() { SceneManager.LoadScene("Start"); }
 
     public void debug_test1()
     {
