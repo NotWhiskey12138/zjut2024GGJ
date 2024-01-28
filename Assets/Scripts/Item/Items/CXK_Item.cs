@@ -2,20 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<< Updated upstream
-public class CXK_Item : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-=======
 public class CXK_Item : Item
 {
     public CXK_Item(Item_SO itemData, VoidEventSO itemEvent) : base(itemData, itemEvent)
@@ -38,6 +25,5 @@ public class CXK_Item : Item
             PlayerController.Instance.throwChicken();
         }
         Debug.Log("CXK_Item被触发了");
->>>>>>> Stashed changes
     }
 }

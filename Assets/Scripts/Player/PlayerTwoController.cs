@@ -6,115 +6,76 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class PlayerTwoController : MonoBehaviour
+public class PlayerTwoController : MonoSingleton<PlayerTwoController>
 {
-    
-        // Ë½ÓÐµÄ¾²Ì¬±äÁ¿£¬ÓÃÓÚ´æ´¢µ¥ÀýÊµÀý
-        private static PlayerTwoController instance;
-
-        // Ë½ÓÐµÄ¹¹Ôìº¯Êý£¬·ÀÖ¹Íâ²¿ÊµÀý»¯¶ÔÏó
-        private PlayerTwoController() { }
-
-        // ¹«¹²µÄ¾²Ì¬ÊôÐÔ»ò·½·¨£¬ÓÃÓÚ»ñÈ¡µ¥ÀýÊµÀý
-        public static PlayerTwoController Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new PlayerTwoController();
-                }
-                return instance;
-            }
-        }
-
-
+    public static int playerID = 2;
     public Player2 inputControl;
     public Vector2 inputDirection;
     public Rigidbody2D rb;
     public PhysicsCheck physicsCheck;
     public DeathCheck deathCheck;
     public CapsuleCollider2D coll;
-<<<<<<< Updated upstream
-    //public FurirenAnmation furierenAnimation;
-    
-    [Header("ÎïÀí²ÄÖÊ")]
-    public PhysicsMaterial2D normal;
-    public PhysicsMaterial2D wall;
-    
-    [Header("ÊôÐÔÊýÖµ")]
-    public float speed;
-=======
     public bool isLongPressing;
     public float longPressDuration = 1.0f;
     public float currentPressTime = 0.0f;
+    public Transform playerTransform;
+    public Vector2 playerPosition;
+    public StageCheck stageCheck;
+    public int deathCounter= 0;
+    public AudioSource audioSource;
+    public AudioClip audioClip;
     //public FurirenAnmation furierenAnimation;
 
-    [Header("")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public PhysicsMaterial2D normal;
     public PhysicsMaterial2D wall;
 
-    [Header("Öµ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ")]
     public float speed = 290;
-    public float dashSpeed = 10;
->>>>>>> Stashed changes
     public float jumpForce;
-    public float flyForce;
+    public float betterJumpForce;
     public bool isDead;
-<<<<<<< Updated upstream
-    
-    [Header("µ±Ç°µÀ¾ßÀ¸")] 
-    [SerializeField]private Item _item; 
-=======
-    private bool isDash;
 
-    [Header("Ç°")]
+    [Header("ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private Item _item;
->>>>>>> Stashed changes
     public GameObject _item_obj;
-    private Collider2D now_coll_item; //Â¼Ç°×²
-    private bool is_item_stillcoll;//Ç·Ò½
+    private Collider2D now_coll_item; //ï¿½ï¿½Â¼ï¿½ï¿½Ç°ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
+    private bool is_item_stillcoll;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ò½ï¿½ï¿½ï¿½
 
-<<<<<<< Updated upstream
-    [Header("µÀ¾ß¹ã²¥")] 
+    [Header("ï¿½ï¿½ï¿½ß¹ã²¥")]
     public VoidEventSO Item_Event;
 
-    [Header("ÆäËû")]
-    [SerializeField] float jumpPressWindow;
-=======
-    [Header("ß¹ã²¥")]
-    public VoidEventSO Item_Event;
+    [Header("ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ï¿½")] public Animation HLS_Aim;
 
-    [Header("å…¶ä»–")]
-    [SerializeField] float jumpPressWindow;
-    [SerializeField] GameObject chicken;
-    [SerializeField] GameObject bullet;
-    [SerializeField] float bulletSpeed;
->>>>>>> Stashed changes
-    private float fallMultiplier = 1.5f;
-    private float lowJumpMultiplier = 1f;
-    private bool isJump = false;
-    private float jumpTime = 0;
-<<<<<<< Updated upstream
-=======
-    private int faceDir;
-    private bool activateOrCancle;
+    [Header("Item")]
+    [SerializeField] private GameObject chicken;
+    [SerializeField] private float dashSpeed;
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private float bulletSpeed;
+    [SerializeField] private float jumpPressWindow;
+    [SerializeField] private float fallMultiplier = 1.5f;
+    [SerializeField] private float lowJumpMultiplier = 1f;
+    private float jumpTime;
     private Transform chickenTransform;
+    private int faceDir;
+    private bool isDash;
+    private bool isJump;
 
->>>>>>> Stashed changes
     private void Awake()
     {
         inputControl = new Player2();
         inputControl.Player.Jump.started += Jump;
-        inputControl.Player.Jump.canceled += BetterJump;
 
     }
     private void Start()
     {
+        playerTransform = GetComponent<Transform>();
+        playerPosition = playerTransform.position;
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<CapsuleCollider2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
         deathCheck = GetComponent<DeathCheck>();
+        stageCheck = GetComponent<StageCheck>();
 
         now_coll_item = null;
     }
@@ -136,55 +97,44 @@ public class PlayerTwoController : MonoBehaviour
         Debug.Log(now_coll_item);
     }
     private void FixedUpdate()
-    {   if (!isDash)
+    {
+        if (!isDash)
             run();
         else
             dash();
         stateCheck();
         outsideDeath();
     }
-    
+    #region ï¿½ï¿½ï¿½ï¿½×´Ì¬
     public void run()
     {
         rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
-         faceDir = (int)transform.localScale.x;
+        faceDir = (int)transform.localScale.x;
         if (inputDirection.x < 0)
             faceDir = -1;
         else if (inputDirection.x > 0)
             faceDir = 1;
-        //×ª
+        //ï¿½ï¿½ï¿½ï·­×ª
         transform.localScale = new Vector3(faceDir, 1, 1);
-    }
-    public void shoot()
-    {
-
-        GameObject go = Instantiate(bullet, transform.position, Quaternion.identity);
-        go.GetComponent<Bullet>().SetBullet(new Vector2(faceDir, 0), bulletSpeed, true);
-
-    }
-    public void dash()
-    {
-        rb.velocity = new Vector2(faceDir * dashSpeed, rb.velocity.y);
-    }
-    public void throwChicken()
-    {
-        GameObject go = Instantiate(chicken, transform.position, Quaternion.identity);
-        go.AddComponent<Rigidbody2D>().velocity = new Vector2(3.0f, 2.0f);
-        chickenTransform = go.GetComponent<Transform>();
-
+        Debug.Log("player1moved");
     }
 
     public void PlayerDead()
     {
         isDead = true;
-        inputControl.Player.Disable();
-        Debug.Log("player1 is dead");
+        //inputControl.Player.Disable();
+        playerTransform.position = playerPosition;
+        deathCounter++;
+        Debug.Log("player1 is dead" + deathCounter + " times");
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
         if (physicsCheck.isGround)
+        {
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+            Musiceffect.Instance.PlaySoundEffect();
+        }
     }
     private void jumpTimeUpdate()
     {
@@ -204,22 +154,52 @@ public class PlayerTwoController : MonoBehaviour
     {
         rb.AddForce(transform.up * jumpForce);
     }
-<<<<<<< Updated upstream
-=======
-  
->>>>>>> Stashed changes
+    public void activateOrCancleElbow()
+    {
+        if (!isDash)
+        {
+            isDash = true;
+
+        }
+        else
+        {
+            isDash = false;
+
+        }
+    }
+    public void throwChicken()
+    {
+        GameObject go = Instantiate(chicken, transform.position, Quaternion.identity);
+        go.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        chickenTransform = go.transform;
+
+    }
+    public void transition()
+    {
+        transform.position = chickenTransform.position;
+    }
+    public void dash()
+    {
+        rb.velocity = new Vector2(dashSpeed * faceDir, rb.velocity.y);
+    }
+    public void shoot()
+    {
+        GameObject go = Instantiate(bullet, transform.position, Quaternion.identity);
+        go.GetComponent<Bullet>().SetBullet(new Vector2(faceDir, 0), bulletSpeed, false);
+    }
     public void stateCheck()
     {
         coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
     }
 
-    public void outsideDeath()//Ð¶
+    public void outsideDeath()//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
     {
-        if(deathCheck.isDead)
+        if (deathCheck.isDead)
             PlayerDead();
     }
+    #endregion
 
-    #region 
+    #region ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     /*private void OnTriggerEnter2D(Collider2D other)
     {
@@ -228,14 +208,17 @@ public class PlayerTwoController : MonoBehaviour
             now_coll_item = other;
         }
     }*/
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("player1") && isDash)
-        {
-            isDash = false;
-           // collision.gameObject.GetComponent<>
-        }
+        if (isDash)
+            if (collision.CompareTag("player2"))
+            {
+                isDash = false;
+                PlayerTwoController.Instance.AddPlayerForce();
+            }
     }
+
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Item"))
@@ -251,7 +234,7 @@ public class PlayerTwoController : MonoBehaviour
     }
 
     /// <summary>
-    /// Ã»Ðµ
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ðµï¿½ï¿½ï¿½
     /// </summary>
     private void CheckIfHaveItem()
     {
@@ -270,26 +253,34 @@ public class PlayerTwoController : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     /// <param name="item"></param>
     public void Pickup_Item(InputAction.CallbackContext context)
     {
-        if (is_item_stillcoll&&now_coll_item!=null)
+        if (is_item_stillcoll && now_coll_item != null)
         {
             var item = now_coll_item.GetComponentInParent<Item>();
-            
+
+            Item.Instance.If1Haveit();
             _item = item;
             Item_Event = item.itemEventSO;
             _item.gameObject.SetActive(false);
             _item_obj.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponentInChildren<SpriteRenderer>().sprite;
             _item_obj.SetActive(true);
         }
-        
+
     }
-    
+
+    public void ClearItem()
+    {
+        _item = null;
+        Item_Event = null;
+        _item_obj.SetActive(false);
+    }
+
     /// <summary>
-    /// Ê¹Ãµ
+    /// Ê¹ï¿½Ãµï¿½ï¿½ï¿½
     /// </summary>
     /// <param name="context"></param>
     private void Use_Item(InputAction.CallbackContext context)
@@ -302,71 +293,50 @@ public class PlayerTwoController : MonoBehaviour
 
     #endregion
 
-    #region É«Î»
+    #region ï¿½ï¿½É«ï¿½ï¿½Î»ï¿½ï¿½
 
-    public void AddPlayerForce(float force,Vector2 dir)
+    public void AddPlayerForce()
     {
-<<<<<<< Updated upstream
-=======
-        Debug.Log("player2addForce");
+        Debug.Log("ADDFORCEï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         Vector2 dir = new Vector2(0, 5);
         int force = 50;
->>>>>>> Stashed changes
         rb.AddForce(dir * force);
     }
 
-    public void activateOrCancleElbow()
-    {
-        if (activateOrCancle)
-        {
-            isDash = true;
-            activateOrCancle = false;
-        }
-        else
-        {
-            isDash = false;
-            activateOrCancle = true;
-        }
 
 
-    }
     #endregion
-<<<<<<< Updated upstream
-=======
-    public int getPlayerID()
+
+    //ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å£ï¿½
+    public void HLS_Shoot_True()
     {
-        return playerID;
+
+        HLS_Aim.Play();
     }
-    //public void setCapacity(int num)
-    //{
-    //    inputControl.Player.Use.RemoveAction();
-    //    switch (num)
-    //    {
-    //        case 0:
-    //            inputControl.Player.Use.performed += Fly;
-    //            break;
-    //        default:
-    //            inputControl.Player.Use.started += Somecapacity;
-    //            break;
-    //    }
-    //}
 
-    //private void Somecapacity(InputAction.CallbackContext context)
-    //{
-    //    speed = 500;
-    //}
 
-    //private void Fly(InputAction.CallbackContext context)
-    //{
-    //    rb.AddForce(transform.up * betterJumpForce, ForceMode2D.Impulse);
-    //}
     public void setIsLongPressing(bool flag)
     {
         isLongPressing = flag;
     }
-    public bool getIslongPressing()
+
+
+    public bool getIsLongPressing()
     {
         return isLongPressing;
     }
->>>>>>> Stashed changes
+
+
+    //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½Í¨ï¿½ï¿½ï¿½Õµï¿½
+    public bool getIsStage()
+    {
+        return stageCheck.isStage;
+    }
+
+    #region DLW(ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½)
+    public void massChange()
+    {
+        rb.mass = 5;
+    }
+    #endregion
 }
