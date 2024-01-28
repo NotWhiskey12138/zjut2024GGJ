@@ -17,6 +17,7 @@ public class ElbowBlow_Item : Item
         {
 
             PlayerTwoController.Instance.activateOrCancleElbow();
+            Musiceffect.instance.PlaySoundElbow();
         }
         else
         {
@@ -24,6 +25,7 @@ public class ElbowBlow_Item : Item
             //PlayerController.Instance.inputControl.Player.Use.canceled += _ => PlayerController.Instance.setIsLongPressing(false);
             //if(PlayerController.Instance.isLongPressing)
             PlayerController.Instance.activateOrCancleElbow();
+            Musiceffect.instance.PlaySoundElbow();
         }
         Debug.Log("elbowBlow_Item被触发了");
     }
