@@ -112,7 +112,7 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
         if (physicsCheck.isGround)
         {
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-            Musiceffect.Instance.PlaySoundEffect();
+            Musiceffect.instance.PlaySoundJump();
         }
     }
 

@@ -37,7 +37,7 @@ public class HLS_Item : Item
             
                 PlayerTwoController.Instance.AddPlayerForce();
                 PlayerTwoController.Instance.HLS_Shoot_True();
-
+                Musiceffect.instance.PlaySoundShit();
             }
             else//玩家一行动
             {
@@ -46,7 +46,7 @@ public class HLS_Item : Item
                 //if(PlayerController.Instance.isLongPressing)
                 PlayerController.Instance.AddPlayerForce();
                 PlayerController.Instance.HLS_Shoot_True();
-                
+                Musiceffect.instance.PlaySoundShit();
             }
             jumpnum--;
         }
