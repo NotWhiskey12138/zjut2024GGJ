@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,6 +7,13 @@ using UnityEngine.InputSystem;
 
 public class HLS_Item : Item
 {
+    private int jumpnum;
+
+    private void Start()
+    {
+        jumpnum = 7;
+    }
+
     public HLS_Item(Item_SO itemData, VoidEventSO itemEvent) : base(itemData, itemEvent)
     {
 
@@ -20,23 +28,31 @@ public class HLS_Item : Item
         // //���÷���
         // //controller.inputControl.Player.Use.started += fly;
         // controller.setCapacity(0);
-        if (Item.Instance.getIf2Haveit())//玩家二
+        
+        if (jumpnum > 0 )
         {
+            if (Item.Instance.getIf2Haveit() )//玩家二
+            {
             
-            PlayerTwoController.Instance.AddPlayerForce();
-            PlayerTwoController.Instance.HLS_Shoot_True();
-            //PlayerTwoController.Instance.ClearItem();
-        }
-        else//玩家一行动
-        {
-            //PlayerController.Instance.inputControl.Player.Use.performed += _ => PlayerController.Instance.setIsLongPressing(true);
-            //PlayerController.Instance.inputControl.Player.Use.canceled += _ => PlayerController.Instance.setIsLongPressing(false);
-            //if(PlayerController.Instance.isLongPressing)
+                PlayerTwoController.Instance.AddPlayerForce();
+                PlayerTwoController.Instance.HLS_Shoot_True();
+
+            }
+            else//玩家一行动
+            {
+                //PlayerController.Instance.inputControl.Player.Use.performed += _ => PlayerController.Instance.setIsLongPressing(true);
+                //PlayerController.Instance.inputControl.Player.Use.canceled += _ => PlayerController.Instance.setIsLongPressing(false);
+                //if(PlayerController.Instance.isLongPressing)
                 PlayerController.Instance.AddPlayerForce();
                 PlayerController.Instance.HLS_Shoot_True();
-                //PlayerController.Instance.ClearItem();
+                
+            }
+            jumpnum--;
         }
-        Musiceffect.Instance.PlaySoundEffect();
-        Debug.Log("HLS_Item被触发了");
+        else if (jumpnum == 0) 
+        {
+            PlayerController.Instance.ClearItem();
+        }
+        
     }
 }
