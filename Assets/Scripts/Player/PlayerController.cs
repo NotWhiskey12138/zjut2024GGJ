@@ -232,10 +232,13 @@ public class PlayerController : MonoSingleton<PlayerController>
     //华莱士动画播放？
     public void HLS_Shoot_True()
     {
-
         HLS_Aim.SetActive(true);
     }
-    
+
+    public void HLS_Shoot_Flase()
+    {
+        HLS_Aim.SetActive(false);
+    }
 
     //public int getPlayerID()
     //{

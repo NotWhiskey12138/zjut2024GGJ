@@ -28,4 +28,9 @@ public class shitAnimation : MonoBehaviour
         
         anim.SetBool("isGround", isGround);
     }
+
+    public void HLS_anim_Finish()
+    {
+        this.gameObject.SetActive(false);
+    }
 }
