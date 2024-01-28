@@ -43,7 +43,7 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
     [Header("道具广播")]
     public VoidEventSO Item_Event;
 
-    [Header("华莱士喷射")] public Animation HLS_Aim;
+    [Header("华莱士喷射")] public GameObject HLS_Aim;
 
     private void Awake()
     {
@@ -53,6 +53,8 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
     }
     private void Start()
     {
+        playerTransform = GetComponent<Transform>();
+        playerPosition = playerTransform.position;
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<CapsuleCollider2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
@@ -179,6 +181,7 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
         if (is_item_stillcoll && now_coll_item != null)
         {
             var item = now_coll_item.GetComponentInParent<Item>();
+            
             Item.Instance.If2Haveit();
             _item = item;
             Item_Event = item.itemEventSO;
@@ -189,6 +192,13 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
 
     }
 
+    public void ClearItem()
+    {
+        _item = null;
+        Item_Event = null;
+        _item_obj.SetActive(false);
+    }
+    
     /// <summary>
     /// 使用道具
     /// </summary>
@@ -200,17 +210,7 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
         _item.removeItemEvent();
     }
     
-    public void HLS_Shoot_True()
-    {
-        HLS_Aim.Play();
-    }
-    public void ClearItem()
-    {
-        _item = null;
-        Item_Event = null;
-        _item_obj.SetActive(false);
-    }
-    
+   
     #endregion
 
     #region 角色被位移
@@ -224,6 +224,15 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
     }
 
     #endregion
+    
+    public void HLS_Shoot_True()
+    {
+        HLS_Aim.SetActive(true);
+    }
+    public void HLS_Shoot_Flase()
+    {
+        HLS_Aim.SetActive(false);
+    }
     public int getPlayerID()
     {
         return playerID;
