@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85175e9addff7e642b9437823cc79d02, type: 3}
-  m_Name: Item_DLW
+  m_Name: Item_elbow_Item
   m_EditorClassIdentifier: 
-  itemId: 5
-  itemName: DLW
+  itemId: 6
+  itemName: elbow
   itemType: 0
-  itemIcon: {fileID: 21300000, guid: 46060c231c0b01e478eeb7fe0d9f919e, type: 3}
+  itemIcon: {fileID: 21300000, guid: d8e958dfff2a6af4b96488330c23bce1, type: 3}

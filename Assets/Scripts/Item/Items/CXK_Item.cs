@@ -16,6 +16,7 @@ public class CXK_Item : Item
         {
 
             PlayerTwoController.Instance.throwChicken();
+            Musiceffect.instance.PlaySoundCxk();
         }
         else
         {
@@ -23,6 +24,7 @@ public class CXK_Item : Item
             //PlayerController.Instance.inputControl.Player.Use.canceled += _ => PlayerController.Instance.setIsLongPressing(false);
             //if(PlayerController.Instance.isLongPressing)
             PlayerController.Instance.throwChicken();
+            Musiceffect.instance.PlaySoundCxk();
         }
         Debug.Log("CXK_Item被触发了");
     }

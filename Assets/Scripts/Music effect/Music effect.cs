@@ -10,6 +10,7 @@ public class Musiceffect : MonoSingleton<Musiceffect>
     public AudioSource soundEffectAudioSource; // 用于播放音效的 AudioSource 组件
     public AudioClip shit;
     public AudioClip jump;
+    public AudioClip cxk;
     private void Awake()
         {
             // 设置单例
@@ -45,6 +46,23 @@ public class Musiceffect : MonoSingleton<Musiceffect>
             soundEffectAudioSource.clip = shit;
             soundEffectAudioSource.Play();
         }
+    public void PlaySoundCxk(float volume = 1f, bool loop = false)
+    {
+        // 检查音效是否为空
+        if (cxk == null)
+        {
+            Debug.LogWarning("Trying to play null audio clip.");
+            return;
+        }
+
+        // 设置音量和循环状态
+        soundEffectAudioSource.volume = volume;
+        soundEffectAudioSource.loop = loop;
+
+        // 播放音效
+        soundEffectAudioSource.clip = cxk;
+        soundEffectAudioSource.Play();
+    }
     public void PlaySoundJump(float volume = 1f, bool loop = false)
     {
         // 检查音效是否为空
