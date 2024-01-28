@@ -21,9 +21,7 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
     public Transform playerTransform;
     public Vector2 playerPosition;
     public StageCheck stageCheck;
-    public int deathCounter= 0;
-    public AudioSource audioSource;
-    public AudioClip audioClip;
+    public int deathCounter= 0;//死亡次数
     //public FurirenAnmation furierenAnimation;
 
     [Header("物理材质")]
@@ -60,8 +58,6 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
         physicsCheck = GetComponent<PhysicsCheck>();
         deathCheck = GetComponent<DeathCheck>();
         stageCheck = GetComponent<StageCheck>();
-        audioSource = GetComponent<AudioSource>();
-        audioSource.clip = audioClip;
         now_coll_item = null;
     }
 
@@ -116,7 +112,7 @@ public class PlayerTwoController : MonoSingleton<PlayerTwoController>
         if (physicsCheck.isGround)
         {
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-            audioSource.Play();
+            Musiceffect.Instance.PlaySoundEffect();
         }
     }
 
