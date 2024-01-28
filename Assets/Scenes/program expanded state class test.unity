@@ -736,7 +736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac34d4780276f1949884ed8f5cba0cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffect: {fileID: 8300000, guid: 42a75a747ceba714b9a247ad1a0e18cf, type: 3}
+  soundEffect: {fileID: 8300000, guid: c2c183f73d939e041bbaa14dab91a91d, type: 3}
 --- !u!82 &1235100715
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1394,9 +1394,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage1
       objectReference: {fileID: 0}
+    - target: {fileID: 639283842339168338, guid: 9cf2109c1ca3ebe4ea504a1524251ee7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8178165aee3f9ad4aa17c83713c81f59, type: 3}
     - target: {fileID: 5707874039005126695, guid: 9cf2109c1ca3ebe4ea504a1524251ee7, type: 3}
       propertyPath: m_Size.x
-      value: 0.5052484
+      value: 0.235942
       objectReference: {fileID: 0}
     - target: {fileID: 5707874039005126695, guid: 9cf2109c1ca3ebe4ea504a1524251ee7, type: 3}
       propertyPath: m_Size.y
@@ -1404,7 +1408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5707874039005126695, guid: 9cf2109c1ca3ebe4ea504a1524251ee7, type: 3}
       propertyPath: m_Offset.x
-      value: -0.0039465427
+      value: 0.03676256
       objectReference: {fileID: 0}
     - target: {fileID: 5707874039005126695, guid: 9cf2109c1ca3ebe4ea504a1524251ee7, type: 3}
       propertyPath: m_Offset.y
